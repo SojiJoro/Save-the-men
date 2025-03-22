@@ -1,30 +1,25 @@
-// app/community/page.tsx
 'use client'
-
 import { useEffect } from 'react'
 
 export default function CommunityPage() {
   // Replace with your actual Disqus shortname
   const DISQUS_SHORTNAME = 'save-the-men'
-
   // The canonical URL for this page on your live site:
   const PAGE_URL = 'https://save-the-men.vercel.app/community'
-  
   // A unique identifier for this thread (can be any string)
   const PAGE_IDENTIFIER = 'community-page'
 
   useEffect(() => {
-    if ((window as any).DISQUS) {
-      // If Disqus is already loaded, reset with new config
-      (window as any).DISQUS.reset({
+    // If Disqus is loaded, reset with new config
+    if (typeof window !== 'undefined' && window.DISQUS) {
+      window.DISQUS.reset({
         reload: true,
-        config: function () {
-          // Casting `this` to `any` so TS doesn't complain about `page`
-          (this as any).page.url = PAGE_URL
-          (this as any).page.identifier = PAGE_IDENTIFIER
+        config: function (this: { page: { url: string; identifier: string } }) {
+          this.page.url = PAGE_URL
+          this.page.identifier = PAGE_IDENTIFIER
         },
       })
-    } else {
+    } else if (typeof window !== 'undefined') {
       // Otherwise, create a new Disqus <script>
       const d = document
       const s = d.createElement('script')
