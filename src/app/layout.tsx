@@ -1,5 +1,6 @@
 // app/layout.tsx
 import './globals.css'
+import Image from 'next/image'
 import { ReactNode } from 'react'
 import Link from 'next/link'
 
@@ -15,8 +16,19 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {/* HEADER / NAV */}
         <header className="header-bar">
           <nav className="nav-container">
-            <div className="logo">
-              <Link href="/">Save The Men</Link>
+            <div className="logo" style={{ display: 'flex', alignItems: 'center' }}>
+              <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: '#fff' }}>
+                {/* Logo SVG */}
+                <Image
+                  src="/logo.svg"
+                  alt="Save The Men Logo"
+                  width={40}
+                  height={40}
+                  priority
+                  style={{ marginRight: '8px' }}
+                />
+                <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Save The Men</span>
+              </Link>
             </div>
             <ul className="nav-links">
               <li><Link href="/">Home</Link></li>

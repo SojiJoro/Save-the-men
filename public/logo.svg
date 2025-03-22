@@ -1,0 +1,23 @@
+<!-- public/logo.svg -->
+<svg
+  width="200"
+  height="200"
+  viewBox="0 0 200 200"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <title>Save The Men - White Logo</title>
+  <!-- Navy circle background -->
+  <circle cx="100" cy="100" r="90" fill="#2c3e50" />
+  
+  <!-- Two white "heads" to symbolise men or people -->
+  <path
+    d="M60 85c0-11 9-20 20-20s20 9 20 20-9 20-20 20-20-9-20-20zm40 0c0-11 9-20 20-20s20 9 20 20-9 20-20 20-20-9-20-20z"
+    fill="#FFFFFF"
+  />
+  
+  <!-- A curved path in white connecting the silhouettes (like joined shoulders) -->
+  <path
+    d="M50 120c15 15 35 15 50 0 15 15 35 15 50 0"
+    fill="#FFFFFF"
+  />
+</svg>
