@@ -4,7 +4,7 @@ export default function AboutPage() {
       <div className="intro-section">
         <h1>About Save The Men</h1>
         <p style={{ marginTop: '20px' }}>
-          Save The Men was born out of a series of X (Twitter) discussions where Nigerian men
+          Save The Men was born out of a series of discussions where Nigerian men
           abroad openly shared their struggles—especially around domestic abuse and cultural stigma.
           These conversations revealed a gap in support: men often felt they had no safe space to
           voice their experiences or seek help.
