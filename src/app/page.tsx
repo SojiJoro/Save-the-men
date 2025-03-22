@@ -31,7 +31,7 @@ export default function HomePage() {
             Helping Nigerian Men in the Diaspora
           </h1>
           <p style={{ marginBottom: '20px' }}>
-            Inspired by X (Twitter) calls for men to speak up, we provide confidential support and resources.
+            Inspired by discussions and calls for men to speak up, we provide confidential support and resources.
           </p>
           <Link
             href="/contact"
@@ -52,7 +52,7 @@ export default function HomePage() {
       <section className="intro-section">
         <h2>Welcome to Save The Men</h2>
         <p>
-          We noticed a surge of conversations on X (Twitter) highlighting how Nigerian men abroad often
+          We noticed a surge of conversations  highlighting how Nigerian men abroad often
           feel unheard—especially when dealing with domestic violence or legal battles. After seeing
           tweets calling for men-focused support, we decided to take action.
         </p>
