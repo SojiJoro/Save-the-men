@@ -38,7 +38,7 @@ body {
   align-items: center;
 }
 
-/* By default, show nav links side by side on desktop */
+/* By default, nav links side by side on desktop */
 .nav-links {
   display: flex;
   gap: 20px;
@@ -54,7 +54,7 @@ body {
   text-decoration: underline;
 }
 
-/* The hamburger button is hidden on desktop, shown on mobile via media query */
+/* The hamburger button is hidden on desktop by default */
 .hamburger-btn {
   display: none;
 }
@@ -152,14 +152,13 @@ body {
 
 /* MEDIA QUERIES FOR MOBILE */
 @media (max-width: 768px) {
-  /* Show hamburger on mobile */
+  /* Show the hamburger button, hide nav links by default */
   .hamburger-btn {
     display: block;
   }
 
-  /* Hide nav links by default on mobile */
   .nav-links {
-    display: none; /* hidden unless toggled */
+    display: none; /* hidden unless toggled by .show class */
     flex-direction: column;
     position: absolute;
     top: 60px; /* below the header bar */
@@ -170,8 +169,16 @@ body {
     gap: 15px;
   }
 
-  /* Show nav links if .show class is added */
   .nav-links.show {
     display: flex;
+  }
+
+  /* Adjust text sizes for smaller screens */
+  .intro-section h2 {
+    font-size: 1.4rem;
+  }
+
+  .help-section h2 {
+    font-size: 1.3rem;
   }
 }

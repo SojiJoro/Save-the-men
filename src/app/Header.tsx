@@ -11,9 +11,11 @@ export default function Header() {
   return (
     <header className="header-bar">
       <nav className="nav-container">
-        {/* LOGO */}
         <div className="logo">
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: '#fff' }}>
+          <Link
+            href="/"
+            style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: '#fff' }}
+          >
             <Image
               src="/logo.svg"
               alt="Save The Men Logo"
@@ -26,16 +28,30 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* HAMBURGER BUTTON */}
+        {/* Hamburger button */}
         <button
           className="hamburger-btn"
           onClick={() => setMenuOpen(!menuOpen)}
+          style={{
+            background: 'none',
+            border: 'none',
+            color: '#fff',
+            fontSize: '1.5rem',
+            cursor: 'pointer',
+          }}
         >
           ☰
         </button>
 
-        {/* NAV LINKS */}
-        <ul className={`nav-links ${menuOpen ? 'show' : ''}`}>
+        {/* Nav links */}
+        <ul
+          className={`nav-links ${menuOpen ? 'show' : ''}`}
+          style={{
+            listStyle: 'none',
+            gap: '20px',
+            transition: 'all 0.3s ease',
+          }}
+        >
           <li><Link href="/">Home</Link></li>
           <li><Link href="/about">About</Link></li>
           <li><Link href="/services">Services</Link></li>

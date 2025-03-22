@@ -1,10 +1,8 @@
-'use client'
-
+// app/layout.tsx
 import './globals.css'
-import Image from 'next/image'
-import { ReactNode, useState } from 'react'
-import Link from 'next/link'
+import { ReactNode } from 'react'
 import Head from 'next/head'
+import Header from './Header' // We'll create this next
 
 export const metadata = {
   title: 'Save The Men',
@@ -12,77 +10,17 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  // Manages whether the mobile menu is open
-  const [menuOpen, setMenuOpen] = useState(false)
-
   return (
     <html lang="en">
-      <Head>
-        {/* Meta for mobile responsiveness */}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
+      {/* 
+        Because this is a server component, we can't directly use <Head> here.
+        Next.js 13 uses the "metadata" object above for <head> elements.
+        If you need a <meta name="viewport">, place it in a "page.tsx" or in 
+        a "head.tsx" file. We'll show an example "head.tsx" soon. 
+      */}
       <body>
-        {/* HEADER / NAV */}
-        <header className="header-bar">
-          <nav className="nav-container">
-            {/* Logo */}
-            <div className="logo">
-              <Link
-                href="/"
-                style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: '#fff' }}
-              >
-                <Image
-                  src="/logo.svg"
-                  alt="Save The Men Logo"
-                  width={40}
-                  height={40}
-                  priority
-                  style={{ marginRight: '8px' }}
-                />
-                <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Save The Men</span>
-              </Link>
-            </div>
-
-            {/* Hamburger button for mobile */}
-            <button
-              className="hamburger-btn"
-              onClick={() => setMenuOpen(!menuOpen)}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: '#fff',
-                fontSize: '1.5rem',
-                cursor: 'pointer',
-              }}
-            >
-              ☰
-            </button>
-
-            {/* Nav links */}
-            <ul
-              className={`nav-links ${menuOpen ? 'show' : ''}`}
-              style={{
-                listStyle: 'none',
-                gap: '20px',
-                transition: 'all 0.3s ease',
-              }}
-            >
-              <li><Link href="/">Home</Link></li>
-              <li><Link href="/about">About</Link></li>
-              <li><Link href="/services">Services</Link></li>
-              <li><Link href="/community">Community</Link></li>
-              <li><Link href="/resources">Resources</Link></li>
-              <li><Link href="/contact">Contact</Link></li>
-            </ul>
-          </nav>
-        </header>
-
-        {/* MAIN CONTENT */}
-        <main>
-          {children}
-        </main>
-
-        {/* FOOTER */}
+        <Header />
+        <main>{children}</main>
         <footer className="footer-bar">
           <div className="footer-container">
             <p>© 2025 Save The Men. All rights reserved.</p>
