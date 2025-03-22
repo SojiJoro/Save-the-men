@@ -12,19 +12,20 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  // State to track whether the mobile menu is open
+  // Manages whether the mobile menu is open
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
     <html lang="en">
       <Head>
-        {/* Ensures proper scaling on mobile */}
+        {/* Meta for mobile responsiveness */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <body>
         {/* HEADER / NAV */}
         <header className="header-bar">
           <nav className="nav-container">
+            {/* Logo */}
             <div className="logo">
               <Link
                 href="/"
@@ -42,12 +43,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               </Link>
             </div>
 
-            {/* Hamburger Button (visible on mobile) */}
+            {/* Hamburger button for mobile */}
             <button
               className="hamburger-btn"
               onClick={() => setMenuOpen(!menuOpen)}
               style={{
-                display: 'none', // hidden on desktop by default
                 background: 'none',
                 border: 'none',
                 color: '#fff',
@@ -58,7 +58,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               ☰
             </button>
 
-            {/* Nav Links - toggled by hamburger on mobile */}
+            {/* Nav links */}
             <ul
               className={`nav-links ${menuOpen ? 'show' : ''}`}
               style={{

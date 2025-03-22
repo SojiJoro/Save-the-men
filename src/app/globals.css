@@ -38,21 +38,10 @@ body {
   align-items: center;
 }
 
-/* HAMBURGER MENU */
-.hamburger-btn {
-  display: none; /* hidden on desktop */
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
+/* By default, show nav links side by side on desktop */
 .nav-links {
   display: flex;
   gap: 20px;
-  list-style: none;
-  transition: all 0.3s ease;
 }
 
 .nav-links li a {
@@ -63,6 +52,11 @@ body {
 
 .nav-links li a:hover {
   text-decoration: underline;
+}
+
+/* The hamburger button is hidden on desktop, shown on mobile via media query */
+.hamburger-btn {
+  display: none;
 }
 
 /* FOOTER STYLES */
@@ -156,18 +150,19 @@ body {
   background-color: #c76c03;
 }
 
-/* RESPONSIVE MEDIA QUERIES */
+/* MEDIA QUERIES FOR MOBILE */
 @media (max-width: 768px) {
+  /* Show hamburger on mobile */
   .hamburger-btn {
-    display: block; /* show hamburger on mobile */
+    display: block;
   }
 
-  /* Hide the nav links by default on mobile */
+  /* Hide nav links by default on mobile */
   .nav-links {
-    display: none; 
+    display: none; /* hidden unless toggled */
     flex-direction: column;
     position: absolute;
-    top: 60px; /* just below the header-bar */
+    top: 60px; /* below the header bar */
     right: 20px;
     background-color: #2c3e50;
     padding: 20px;
@@ -175,19 +170,8 @@ body {
     gap: 15px;
   }
 
+  /* Show nav links if .show class is added */
   .nav-links.show {
-    display: flex; /* show if toggled */
-  }
-
-  .nav-links li {
-    margin: 0; /* no extra margin for stacked items */
-  }
-
-  /* Adjust text in hero overlay, etc. if needed */
-  .intro-section h2 {
-    font-size: 1.4rem;
-  }
-  .help-section h2 {
-    font-size: 1.3rem;
+    display: flex;
   }
 }
