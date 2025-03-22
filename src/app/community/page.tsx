@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 
 export default function CommunityPage() {
   // Replace with your actual Disqus shortname
-  const DISQUS_SHORTNAME = 'save-the-men' // e.g. 'save-the-men' if your Disqus URL is https://save-the-men.disqus.com
+  const DISQUS_SHORTNAME = 'save-the-men'
 
   // The canonical URL for this page on your live site:
   const PAGE_URL = 'https://save-the-men.vercel.app/community'
@@ -14,13 +14,14 @@ export default function CommunityPage() {
   const PAGE_IDENTIFIER = 'community-page'
 
   useEffect(() => {
-    // If Disqus is already loaded, reset it with new config
-    if (window.DISQUS) {
-      window.DISQUS.reset({
+    if ((window as any).DISQUS) {
+      // If Disqus is already loaded, reset with new config
+      (window as any).DISQUS.reset({
         reload: true,
         config: function () {
-          this.page.url = PAGE_URL
-          this.page.identifier = PAGE_IDENTIFIER
+          // Casting `this` to `any` so TS doesn't complain about `page`
+          (this as any).page.url = PAGE_URL
+          (this as any).page.identifier = PAGE_IDENTIFIER
         },
       })
     } else {
