@@ -1,9 +1,10 @@
-// app/layout.tsx
+'use client'
+
 import './globals.css'
 import Image from 'next/image'
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 import Link from 'next/link'
-import Head from 'next/head' // <-- Import
+import Head from 'next/head'
 
 export const metadata = {
   title: 'Save The Men',
@@ -11,10 +12,13 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
+  // State to track whether the mobile menu is open
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
     <html lang="en">
       <Head>
-        {/* Tells mobile browsers to size content to the device width */}
+        {/* Ensures proper scaling on mobile */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <body>
@@ -22,7 +26,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <header className="header-bar">
           <nav className="nav-container">
             <div className="logo">
-              <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: '#fff' }}>
+              <Link
+                href="/"
+                style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: '#fff' }}
+              >
                 <Image
                   src="/logo.svg"
                   alt="Save The Men Logo"
@@ -34,7 +41,32 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Save The Men</span>
               </Link>
             </div>
-            <ul className="nav-links">
+
+            {/* Hamburger Button (visible on mobile) */}
+            <button
+              className="hamburger-btn"
+              onClick={() => setMenuOpen(!menuOpen)}
+              style={{
+                display: 'none', // hidden on desktop by default
+                background: 'none',
+                border: 'none',
+                color: '#fff',
+                fontSize: '1.5rem',
+                cursor: 'pointer',
+              }}
+            >
+              ☰
+            </button>
+
+            {/* Nav Links - toggled by hamburger on mobile */}
+            <ul
+              className={`nav-links ${menuOpen ? 'show' : ''}`}
+              style={{
+                listStyle: 'none',
+                gap: '20px',
+                transition: 'all 0.3s ease',
+              }}
+            >
               <li><Link href="/">Home</Link></li>
               <li><Link href="/about">About</Link></li>
               <li><Link href="/services">Services</Link></li>
@@ -45,15 +77,20 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </nav>
         </header>
 
-        <main>{children}</main>
+        {/* MAIN CONTENT */}
+        <main>
+          {children}
+        </main>
 
+        {/* FOOTER */}
         <footer className="footer-bar">
           <div className="footer-container">
             <p>© 2025 Save The Men. All rights reserved.</p>
             <p className="footer-disclaimer">
               <strong>Disclaimer:</strong> We are not a crisis centre, law firm, or healthcare provider.
-              If you are in immediate danger, please call local emergency services (999 in the UK,
-              911 in the US, 112 in Nigeria).
+              Information on this site is for general guidance only. If you are in immediate danger, please call
+              local emergency services (999 in the UK, 911 in the US, 112 in Nigeria). We do not assume any legal
+              liability for the actions taken by site users.
             </p>
           </div>
         </footer>

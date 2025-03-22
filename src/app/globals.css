@@ -38,10 +38,21 @@ body {
   align-items: center;
 }
 
+/* HAMBURGER MENU */
+.hamburger-btn {
+  display: none; /* hidden on desktop */
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
 .nav-links {
   display: flex;
   gap: 20px;
   list-style: none;
+  transition: all 0.3s ease;
 }
 
 .nav-links li a {
@@ -145,46 +156,38 @@ body {
   background-color: #c76c03;
 }
 
-/* OPTIONAL: HERO SECTION CLASS */
-.hero-section {
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  min-height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-}
-
-/* MOBILE RESPONSIVE MEDIA QUERIES */
+/* RESPONSIVE MEDIA QUERIES */
 @media (max-width: 768px) {
-  /* Make nav-links stack vertically */
+  .hamburger-btn {
+    display: block; /* show hamburger on mobile */
+  }
+
+  /* Hide the nav links by default on mobile */
   .nav-links {
+    display: none; 
     flex-direction: column;
-    gap: 10px;
+    position: absolute;
+    top: 60px; /* just below the header-bar */
+    right: 20px;
+    background-color: #2c3e50;
+    padding: 20px;
+    border-radius: 5px;
+    gap: 15px;
   }
 
-  .nav-container {
-    padding: 0 10px;
+  .nav-links.show {
+    display: flex; /* show if toggled */
   }
 
-  /* Reduce margins/padding for intro/help/form sections */
-  .intro-section,
-  .help-section,
-  .form-container {
-    margin: 20px auto;
-    padding: 0 15px;
+  .nav-links li {
+    margin: 0; /* no extra margin for stacked items */
   }
 
-  .intro-section h2,
-  .help-section h2 {
+  /* Adjust text in hero overlay, etc. if needed */
+  .intro-section h2 {
     font-size: 1.4rem;
   }
-
-  /* Adjust hero section for mobile if used */
-  .hero-section {
-    min-height: 300px;
-    background-position: center top;
+  .help-section h2 {
+    font-size: 1.3rem;
   }
 }

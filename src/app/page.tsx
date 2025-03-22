@@ -9,7 +9,6 @@ export default function HomePage() {
     <>
       {/* HERO SECTION */}
       <section style={{ position: 'relative' }}>
-        {/* Container for the hero image */}
         <div style={{ position: 'relative', width: '100%', height: '400px' }}>
           <Image
             src="/images/hero-brotherhood.jpg"
