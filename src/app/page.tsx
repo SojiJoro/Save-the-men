@@ -8,7 +8,7 @@ export default function HomePage() {
       <section
         style={{
           position: 'relative',
-          backgroundImage: 'url("/images/hero-man.jpg")',
+          backgroundImage: 'url("/images/hero-brotherhood.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           minHeight: '400px',
@@ -36,7 +36,7 @@ export default function HomePage() {
           <Link
             href="/contact"
             style={{
-              backgroundColor: '#FFA726',
+              backgroundColor: '#e58406', /* Orange accent */
               color: '#fff',
               padding: '10px 20px',
               textDecoration: 'none',
@@ -82,7 +82,7 @@ export default function HomePage() {
           href="/contact"
           style={{
             display: 'inline-block',
-            backgroundColor: '#0D4A71',
+            backgroundColor: '#2c3e50',
             color: '#fff',
             padding: '10px 20px',
             textDecoration: 'none',

@@ -13,9 +13,9 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // For now, just show a message.
+    // For now, just show a success message
     setResponse('Thank you for contacting us. We will get back to you soon.')
-    // Reset form
+    // Reset the form
     setFormData({ name: '', email: '', message: '' })
   }
 

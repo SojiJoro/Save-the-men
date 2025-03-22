@@ -39,9 +39,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <div className="footer-container">
             <p>© 2025 Save The Men. All rights reserved.</p>
             <p className="footer-disclaimer">
-              <strong>Disclaimer:</strong> We are not a crisis centre, law firm, or healthcare provider.  
-              Information on this site is for general guidance. If you are in immediate danger, please call
-              emergency services (999 in the UK, 911 in the US, 112 in Nigeria).
+              <strong>Disclaimer:</strong> We are not a crisis centre, law firm, or healthcare provider.
+              If you are in immediate danger, please call local emergency services (999 in the UK,
+              911 in the US, 112 in Nigeria).
             </p>
           </div>
         </footer>

@@ -12,8 +12,7 @@ export default function AboutPage() {
         <p style={{ marginTop: '10px' }}>
           Our vision is to create a supportive environment where men can access resources,
           connect with advocates, and find hope in difficult times. We collaborate with
-          charities, legal experts, and mental health professionals to ensure every man
-          receives the right kind of support.
+          various experts to ensure every man receives the right kind of support.
         </p>
         <p style={{ marginTop: '10px' }}>
           Whether you need emotional guidance, legal referrals, or simply a listening ear,

@@ -4,14 +4,14 @@ export default function ResourcesPage() {
       <div className="intro-section">
         <h1>Resources</h1>
         <p style={{ marginTop: '20px' }}>
-          Below are some articles, downloadable guides, and external links to help you understand
-          your rights and options as a Nigerian man abroad.
+          Here you will find articles, downloadable guides, and external links to help you
+          understand your rights and options as a Nigerian man living abroad.
         </p>
   
         <h2 style={{ marginTop: '30px' }}>Downloadable Guides</h2>
         <ul style={{ marginTop: '10px', lineHeight: '1.8' }}>
-          <li><strong>Africentric Parenting Abroad (PDF)</strong> – Coming Soon</li>
-          <li><strong>Domestic Abuse & Immigration Basics (PDF)</strong> – Coming Soon</li>
+          <li><strong>Diaspora Parenting for African Families (PDF)</strong> – Coming Soon</li>
+          <li><strong>Domestic Abuse & Immigration: A Men’s Guide (PDF)</strong> – Coming Soon</li>
         </ul>
   
         <h2 style={{ marginTop: '30px' }}>External Links</h2>
