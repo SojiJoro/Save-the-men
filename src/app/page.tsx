@@ -1,4 +1,3 @@
-// app/page.tsx
 'use client'
 
 import Image from 'next/image'
@@ -9,6 +8,7 @@ export default function HomePage() {
     <>
       {/* HERO SECTION */}
       <section style={{ position: 'relative' }}>
+        {/* Hero image container */}
         <div style={{ position: 'relative', width: '100%', height: '400px' }}>
           <Image
             src="/images/hero-brotherhood.jpg"
@@ -19,19 +19,21 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Overlay text */}
+        {/* Overlay text (centered) */}
         <div
           style={{
             position: 'absolute',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
+            width: '90%',       // so it doesn't overflow the image
+            maxWidth: '600px', // or whatever you prefer
             backgroundColor: 'rgba(0,0,0,0.5)',
             padding: '20px',
             borderRadius: '5px',
             textAlign: 'center',
-            maxWidth: '600px',
             color: '#fff',
+            zIndex: 1,         // ensures overlay is above the image
           }}
         >
           <h1 style={{ fontSize: '2.5rem', marginBottom: '10px' }}>

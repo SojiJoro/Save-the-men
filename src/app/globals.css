@@ -24,6 +24,10 @@ body {
   padding: 10px 0;
 }
 
+/* 
+  z-index so the nav container sits above any hero overlay 
+  (like the black box in your hero). 
+*/
 .nav-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -31,6 +35,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 9999; 
 }
 
 .logo {
@@ -38,9 +44,16 @@ body {
   align-items: center;
 }
 
+/* By default, nav links side by side on desktop */
 .nav-links {
   display: flex;
   gap: 20px;
+  list-style: none;
+}
+
+/* If you want the nav to also overlay hero, add a high z-index when .show is toggled */
+.nav-links.show {
+  z-index: 9999;
 }
 
 .nav-links li a {
@@ -150,7 +163,7 @@ body {
 
 /* MEDIA QUERIES FOR MOBILE */
 @media (max-width: 768px) {
-  /* Show hamburger, hide nav links by default */
+  /* Show the hamburger button, hide nav links by default */
   .hamburger-btn {
     display: block;
     background: none;
@@ -161,10 +174,10 @@ body {
   }
 
   .nav-links {
-    display: none;
+    display: none; 
     flex-direction: column;
     position: absolute;
-    top: 60px;
+    top: 60px; /* below the header bar */
     right: 20px;
     background-color: #2c3e50;
     padding: 20px;
@@ -174,5 +187,13 @@ body {
 
   .nav-links.show {
     display: flex;
+  }
+
+  .intro-section h2 {
+    font-size: 1.4rem;
+  }
+
+  .help-section h2 {
+    font-size: 1.3rem;
   }
 }
