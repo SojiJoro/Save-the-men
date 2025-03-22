@@ -23,8 +23,8 @@ export default function ContactPage() {
     <div className="form-container">
       <h1>Contact Us</h1>
       <p style={{ marginTop: '20px' }}>
-        If you have questions, need guidance, or want to share resources,
-        please fill out the form below. We respect your privacy and will keep your details confidential.
+        If you have questions, need guidance, or want to share your story, please fill out the form below.
+        We respect your privacy and will keep your details confidential.
       </p>
 
       <form onSubmit={handleSubmit}>
@@ -66,6 +66,12 @@ export default function ContactPage() {
           {response}
         </p>
       )}
+
+      <p style={{ marginTop: '20px', fontSize: '0.9rem', color: '#666' }}>
+        <strong>Disclaimer:</strong> By submitting this form, you acknowledge that Save The Men is not liable
+        for any decisions you make based on our guidance. We provide support and referrals only, and do not
+        replace professional legal or medical advice.
+      </p>
     </div>
   )
 }

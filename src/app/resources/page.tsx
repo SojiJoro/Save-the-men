@@ -4,41 +4,42 @@ export default function ResourcesPage() {
       <div className="intro-section">
         <h1>Resources</h1>
         <p style={{ marginTop: '20px' }}>
-          Here you will find articles, downloadable guides, and external links to help you
-          understand your rights and options as a Nigerian man living abroad.
+          Below you’ll find articles, downloadable guides, and external links to help you navigate
+          life abroad as a Nigerian man. We’re always adding more—feel free to contact us with suggestions.
         </p>
   
         <h2 style={{ marginTop: '30px' }}>Downloadable Guides</h2>
         <ul style={{ marginTop: '10px', lineHeight: '1.8' }}>
-          <li><strong>Diaspora Parenting for African Families (PDF)</strong> – Coming Soon</li>
-          <li><strong>Domestic Abuse & Immigration: A Men’s Guide (PDF)</strong> – Coming Soon</li>
+          <li><strong>Men’s Guide to Domestic Abuse & Immigration (PDF)</strong> – Coming Soon</li>
+          <li><strong>Parenting Across Cultures: Tips for Nigerian Fathers Abroad (PDF)</strong> – Coming Soon</li>
         </ul>
   
         <h2 style={{ marginTop: '30px' }}>External Links</h2>
         <ul style={{ marginTop: '10px', lineHeight: '1.8' }}>
           <li>
-            <strong>Men’s Advice Line (UK):</strong>
-            {' '}<a href="https://mensadviceline.org.uk" target="_blank" rel="noopener noreferrer">
+            <strong>Men’s Advice Line (UK):</strong>{' '}
+            <a href="https://mensadviceline.org.uk" target="_blank" rel="noopener noreferrer">
               mensadviceline.org.uk
             </a>
           </li>
           <li>
-            <strong>ManKind Initiative (UK):</strong>
-            {' '}<a href="https://mankind.org.uk" target="_blank" rel="noopener noreferrer">
+            <strong>ManKind Initiative (UK):</strong>{' '}
+            <a href="https://mankind.org.uk" target="_blank" rel="noopener noreferrer">
               mankind.org.uk
             </a>
           </li>
           <li>
-            <strong>Lagos State DSVA:</strong>
-            {' '}<a href="https://dsvrtlagos.org" target="_blank" rel="noopener noreferrer">
+            <strong>Lagos State DSVA:</strong>{' '}
+            <a href="https://dsvrtlagos.org" target="_blank" rel="noopener noreferrer">
               dsvrtlagos.org
             </a>
           </li>
         </ul>
   
         <p style={{ marginTop: '20px' }}>
-          We are continuously updating our resource library. If you know of any helpful materials,
-          please <a href="/contact">contact us</a>.
+          <em>Disclaimer:</em> These resources are provided for informational purposes. We do not own or
+          control the content of external sites. Please seek professional advice for specific legal or
+          medical matters.
         </p>
       </div>
     )

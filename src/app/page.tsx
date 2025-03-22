@@ -28,15 +28,15 @@ export default function HomePage() {
           }}
         >
           <h1 style={{ fontSize: '2.5rem', marginBottom: '10px' }}>
-            Helping Nigerian Men Escape Domestic Abuse
+            Helping Nigerian Men in the Diaspora
           </h1>
           <p style={{ marginBottom: '20px' }}>
-            We provide confidential help and support for men facing domestic violence abroad.
+            Inspired by X (Twitter) calls for men to speak up, we provide confidential support and resources.
           </p>
           <Link
             href="/contact"
             style={{
-              backgroundColor: '#e58406', /* Orange accent */
+              backgroundColor: '#e58406',
               color: '#fff',
               padding: '10px 20px',
               textDecoration: 'none',
@@ -52,19 +52,21 @@ export default function HomePage() {
       <section className="intro-section">
         <h2>Welcome to Save The Men</h2>
         <p>
-          We understand that Nigerian men living abroad may face unique challenges, including domestic abuse,
-          cultural stigma, and legal complexities. Our mission is to provide resources, guidance, and a safe
-          community for men who need help.
+          We noticed a surge of conversations on X (Twitter) highlighting how Nigerian men abroad often
+          feel unheard—especially when dealing with domestic violence or legal battles. After seeing
+          tweets calling for men-focused support, we decided to take action.
         </p>
         <p>
-          <strong>Remember:</strong> You are not alone. Speak up, reach out, and let us support you in your journey.
+          Our platform provides culturally relevant guidance, legal signposting, mental health resources,
+          and a safe community where Nigerian men can speak openly. Whether you’re in the UK, Portugal,
+          the US, or elsewhere, our mission is to remind you: <strong>You are not alone.</strong>
         </p>
       </section>
 
       {/* NEED HELP RIGHT AWAY? SECTION */}
       <section className="help-section">
         <h2>Need Help Right Away?</h2>
-        <p>Call emergency services if you are in immediate danger:</p>
+        <p>If you’re in immediate danger, call emergency services:</p>
         <ul className="help-list">
           <li><strong>UK:</strong> 999</li>
           <li><strong>Nigeria:</strong> 112 (or 767 in Lagos)</li>

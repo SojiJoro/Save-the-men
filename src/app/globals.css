@@ -33,11 +33,9 @@ body {
   align-items: center;
 }
 
-.logo a {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #fff;
-  text-decoration: none;
+.logo {
+  display: flex;
+  align-items: center;
 }
 
 .nav-links {
@@ -144,5 +142,5 @@ body {
 }
 
 .form-container button:hover {
-  background-color: #c76c03; /* Slightly darker on hover */
+  background-color: #c76c03;
 }

@@ -4,19 +4,21 @@ export default function AboutPage() {
       <div className="intro-section">
         <h1>About Save The Men</h1>
         <p style={{ marginTop: '20px' }}>
-          Save The Men is a community-focused initiative established to address the unique
-          challenges Nigerian men face in the diaspora. We understand the cultural, legal,
-          and social barriers that can prevent men from seeking help when they experience
-          domestic abuse or other crises.
+          Save The Men was born out of a series of X (Twitter) discussions where Nigerian men
+          abroad openly shared their struggles—especially around domestic abuse and cultural stigma.
+          These conversations revealed a gap in support: men often felt they had no safe space to
+          voice their experiences or seek help.
         </p>
         <p style={{ marginTop: '10px' }}>
-          Our vision is to create a supportive environment where men can access resources,
-          connect with advocates, and find hope in difficult times. We collaborate with
-          various experts to ensure every man receives the right kind of support.
+          Our mission is to <strong>empower Nigerian men worldwide</strong> by providing resources,
+          advocacy, and a strong community network. We strive to break the stigma that keeps men silent,
+          ensuring everyone—man, woman, or child—can seek help without shame.
         </p>
         <p style={{ marginTop: '10px' }}>
-          Whether you need emotional guidance, legal referrals, or simply a listening ear,
-          Save The Men is here to help you navigate life abroad safely and confidently.
+          We believe in <strong>confidentiality</strong>, <strong>cultural sensitivity</strong>, and
+          <strong> empathy</strong>. By bridging the gap between Nigerian traditions and Western laws,
+          we aim to help men navigate challenges like immigration, domestic abuse, and family disputes
+          with greater confidence.
         </p>
       </div>
     )
