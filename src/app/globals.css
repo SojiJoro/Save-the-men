@@ -1,22 +1,148 @@
 /* app/globals.css */
 
-body {
+/* OPTIONAL: Import a Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+/* RESET */
+* {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* BODY STYLES */
+body {
+  font-family: 'Open Sans', sans-serif;
   background-color: #fff;
   color: #333;
 }
 
-a {
+/* HEADER (NAV) STYLES */
+.header-bar {
+  background-color: #0D4A71;
+  color: #fff;
+  padding: 10px 0;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a {
+  font-size: 1.5rem;
+  font-weight: bold;
   color: #fff;
   text-decoration: none;
 }
 
-a:hover {
+.nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.nav-links li a:hover {
   text-decoration: underline;
 }
 
-ul {
-  list-style: disc inside;
+/* FOOTER STYLES */
+.footer-bar {
+  background-color: #0D4A71;
+  color: #fff;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.footer-disclaimer {
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+/* INTRO SECTION */
+.intro-section {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  line-height: 1.6;
+}
+
+.intro-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+/* HELP SECTION */
+.help-section {
+  background-color: #f9f9f9;
+  padding: 40px 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.help-section h2 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+}
+
+.help-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px auto;
+  line-height: 1.8;
+}
+
+/* COMMON FORM STYLES */
+.form-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.form-container form {
+  margin-top: 30px;
+}
+
+.form-container label {
+  font-weight: 600;
+}
+
+.form-container input,
+.form-container textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-container button {
+  background-color: #FFA726;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.form-container button:hover {
+  background-color: #f57c00;
 }

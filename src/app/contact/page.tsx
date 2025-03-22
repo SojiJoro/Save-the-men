@@ -1,4 +1,6 @@
-'use client'  // because we need client-side form handling
+// app/contact/page.tsx
+'use client'
+
 import { useState } from 'react'
 
 export default function ContactPage() {
@@ -9,41 +11,61 @@ export default function ContactPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
-    })
-    const data = await res.json()
-    if (data.status === 'ok') {
-      setResponse('Thank you for reaching out. We will get back to you soon.')
-      setFormData({ name: '', email: '', message: '' })
-    } else {
-      setResponse('Something went wrong. Please try again.')
-    }
+    // For now, just show a message.
+    setResponse('Thank you for contacting us. We will get back to you soon.')
+    // Reset form
+    setFormData({ name: '', email: '', message: '' })
   }
 
   return (
-    <div>
+    <div className="form-container">
       <h1>Contact Us</h1>
+      <p style={{ marginTop: '20px' }}>
+        If you have questions, need guidance, or want to share resources,
+        please fill out the form below. We respect your privacy and will keep your details confidential.
+      </p>
+
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Name:</label><br />
-          <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+          <label>Name</label><br />
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div>
-          <label>Email:</label><br />
-          <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+          <label>Email</label><br />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div>
-          <label>Message:</label><br />
-          <textarea name="message" value={formData.message} onChange={handleChange} required />
+          <label>Message</label><br />
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            required
+            rows={5}
+          />
         </div>
-        <button type="submit">Send Message</button>
+        <button type="submit">Send</button>
       </form>
-      {response && <p>{response}</p>}
+
+      {response && (
+        <p style={{ marginTop: '20px', color: 'green' }}>
+          {response}
+        </p>
+      )}
     </div>
   )
 }
