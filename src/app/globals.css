@@ -144,3 +144,47 @@ body {
 .form-container button:hover {
   background-color: #c76c03;
 }
+
+/* OPTIONAL: HERO SECTION CLASS */
+.hero-section {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+/* MOBILE RESPONSIVE MEDIA QUERIES */
+@media (max-width: 768px) {
+  /* Make nav-links stack vertically */
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-container {
+    padding: 0 10px;
+  }
+
+  /* Reduce margins/padding for intro/help/form sections */
+  .intro-section,
+  .help-section,
+  .form-container {
+    margin: 20px auto;
+    padding: 0 15px;
+  }
+
+  .intro-section h2,
+  .help-section h2 {
+    font-size: 1.4rem;
+  }
+
+  /* Adjust hero section for mobile if used */
+  .hero-section {
+    min-height: 300px;
+    background-position: center top;
+  }
+}

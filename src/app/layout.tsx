@@ -3,6 +3,7 @@ import './globals.css'
 import Image from 'next/image'
 import { ReactNode } from 'react'
 import Link from 'next/link'
+import Head from 'next/head' // <-- Import
 
 export const metadata = {
   title: 'Save The Men',
@@ -12,12 +13,15 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
+      <Head>
+        {/* Tells mobile browsers to size content to the device width */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
       <body>
         {/* HEADER / NAV */}
         <header className="header-bar">
           <nav className="nav-container">
             <div className="logo">
-              {/* If you don't have logo.svg, remove the Image component */}
               <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: '#fff' }}>
                 <Image
                   src="/logo.svg"
@@ -41,20 +45,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </nav>
         </header>
 
-        {/* MAIN CONTENT */}
-        <main>
-          {children}
-        </main>
+        <main>{children}</main>
 
-        {/* FOOTER */}
         <footer className="footer-bar">
           <div className="footer-container">
             <p>© 2025 Save The Men. All rights reserved.</p>
             <p className="footer-disclaimer">
               <strong>Disclaimer:</strong> We are not a crisis centre, law firm, or healthcare provider.
-              Information on this site is for general guidance only. If you are in immediate danger, please call
-              local emergency services (999 in the UK, 911 in the US, 112 in Nigeria). We do not assume any legal
-              liability for the actions taken by site users.
+              If you are in immediate danger, please call local emergency services (999 in the UK,
+              911 in the US, 112 in Nigeria).
             </p>
           </div>
         </footer>

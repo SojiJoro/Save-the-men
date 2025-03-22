@@ -1,30 +1,38 @@
 // app/page.tsx
+'use client'
+
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function HomePage() {
   return (
     <>
       {/* HERO SECTION */}
-      <section
-        style={{
-          position: 'relative',
-          backgroundImage: 'url("/images/hero-brotherhood.jpg")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          minHeight: '400px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#fff',
-        }}
-      >
+      <section style={{ position: 'relative' }}>
+        {/* Container for the hero image */}
+        <div style={{ position: 'relative', width: '100%', height: '400px' }}>
+          <Image
+            src="/images/hero-brotherhood.jpg"
+            alt="Brotherhood"
+            fill
+            priority
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
+        </div>
+
+        {/* Overlay text */}
         <div
           style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
             backgroundColor: 'rgba(0,0,0,0.5)',
             padding: '20px',
             borderRadius: '5px',
             textAlign: 'center',
             maxWidth: '600px',
+            color: '#fff',
           }}
         >
           <h1 style={{ fontSize: '2.5rem', marginBottom: '10px' }}>
@@ -52,7 +60,7 @@ export default function HomePage() {
       <section className="intro-section">
         <h2>Welcome to Save The Men</h2>
         <p>
-          We noticed a surge of conversations  highlighting how Nigerian men abroad often
+          We noticed a surge of conversations highlighting how Nigerian men abroad often
           feel unheard—especially when dealing with domestic violence or legal battles. After seeing
           tweets calling for men-focused support, we decided to take action.
         </p>
