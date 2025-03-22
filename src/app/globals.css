@@ -1,28 +1,22 @@
-/* src/app/globals.css */
-:root {
-  --primary: #2c3e50;
-  --secondary: #537ea2;
-  --accent: #e58406;
-  --background: #f5f5f5;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* app/globals.css */
 
 body {
-  font-family: 'Open Sans', sans-serif;
-  background: var(--background);
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
   color: #333;
 }
 
 a {
-  color: var(--accent);
+  color: #fff;
   text-decoration: none;
 }
 
 a:hover {
   text-decoration: underline;
+}
+
+ul {
+  list-style: disc inside;
 }
