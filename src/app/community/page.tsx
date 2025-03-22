@@ -1,4 +1,6 @@
+// app/community/page.tsx
 'use client'
+
 import { useEffect } from 'react'
 
 export default function CommunityPage() {
@@ -6,12 +8,12 @@ export default function CommunityPage() {
   const DISQUS_SHORTNAME = 'save-the-men'
   // The canonical URL for this page on your live site:
   const PAGE_URL = 'https://save-the-men.vercel.app/community'
-  // A unique identifier for this thread (can be any string)
+  // A unique identifier for this thread
   const PAGE_IDENTIFIER = 'community-page'
 
   useEffect(() => {
-    // If Disqus is loaded, reset with new config
     if (typeof window !== 'undefined' && window.DISQUS) {
+      // If Disqus is loaded, reset with new config
       window.DISQUS.reset({
         reload: true,
         config: function (this: { page: { url: string; identifier: string } }) {
@@ -24,7 +26,8 @@ export default function CommunityPage() {
       const d = document
       const s = d.createElement('script')
       s.src = `https://${DISQUS_SHORTNAME}.disqus.com/embed.js`
-      s.setAttribute('data-timestamp', +new Date().toString())
+      // Use Date.now().toString() for a string timestamp
+      s.setAttribute('data-timestamp', Date.now().toString())
       ;(d.head || d.body).appendChild(s)
     }
   }, [DISQUS_SHORTNAME, PAGE_URL, PAGE_IDENTIFIER])
@@ -41,19 +44,19 @@ export default function CommunityPage() {
       <h2 style={{ marginTop: '30px' }}>Upcoming Events</h2>
       <ul style={{ marginTop: '10px', lineHeight: '1.8' }}>
         <li>
-          <strong>Monthly Online Forum:</strong> 
+          <strong>Monthly Online Forum:</strong>
           Last Saturday of each month via Zoom. Topic: “Breaking the Silence—Real Stories of Nigerian Men Abroad.”
         </li>
         <li>
-          <strong>Legal Q&A Session:</strong> 
+          <strong>Legal Q&A Session:</strong>
           Quarterly webinar with volunteer solicitors to discuss domestic abuse and immigration.
         </li>
         <li>
-          <strong>In-Person Meetup (London):</strong> 
+          <strong>In-Person Meetup (London):</strong>
           A social gathering to share stories and connect with local resources.
         </li>
         <li>
-          <strong>Portugal Extension:</strong> 
+          <strong>Portugal Extension:</strong>
           We’re planning a small meetup in Lisbon later this year, by popular request.
         </li>
       </ul>
