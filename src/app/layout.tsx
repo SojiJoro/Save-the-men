@@ -36,16 +36,17 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         rel="noopener noreferrer"
         style={{ textDecoration: 'none', color: '#1da1f2' }}
       >
-        <span style={{ display: 'inline-flex', alignItems: 'center' }}>
-          <img
-            src="/images/x-logo.svg"
-            alt="X Logo"
-            style={{ width: '16px', height: '16px', marginRight: '5px' }}
-          />
-          Favoredsinner
-        </span>
-      </a>
-      {' '}on X
+        Favoredsinner
+      </a>{' '}
+      on{' '}
+      <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+        <img
+          src="/images/x-logo.svg"
+          alt="X Logo"
+          style={{ width: '16px', height: '16px', marginRight: '5px' }}
+        />
+        X
+      </span>
     </p>
   </div>
 </footer>
