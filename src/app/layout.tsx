@@ -42,7 +42,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             alt="X Logo"
             style={{ width: '16px', height: '16px', marginRight: '5px' }}
           />
-          @Favoredsinner
+          Favoredsinner
         </span>
       </a>
       {' '}on X
