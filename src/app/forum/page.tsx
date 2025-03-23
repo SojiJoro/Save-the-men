@@ -69,7 +69,7 @@ export default function ForumPage() {
         We are <em>not</em> a crisis centre, law firm, or healthcare provider.
       </p>
       <p style={{ marginTop: '10px' }}>
-        <strong>Confidentiality:</strong> We do not store personal info or IP addresses here. 
+        <strong>Confidentiality:</strong> We do not store personal information or IP addresses here. 
         For urgent help, please contact local emergency services.
       </p>
 
