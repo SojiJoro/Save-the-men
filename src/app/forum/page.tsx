@@ -90,7 +90,7 @@ export default function AnonymousForum() {
         method: 'DELETE',
         headers: {
           // This key must match process.env.ADMIN_KEY on the server
-          'x-admin-key': 'mySecretAdminKey12345'
+          'x-admin-key': 'Smogdmplus'
         }
       })
       if (!res.ok) {

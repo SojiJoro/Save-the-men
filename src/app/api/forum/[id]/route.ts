@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import mongoose from 'mongoose'
 import { connectDB } from '@/app/utils/db'
 
-// Example schema for forum posts
+// Example schema
 const postSchema = new mongoose.Schema({
   title: String,
   body: String,
@@ -18,13 +18,14 @@ const Post = mongoose.models.Post || mongoose.model('Post', postSchema)
  */
 export async function DELETE(
   request: NextRequest,
-  context: { params: { id: string } }
-): Promise<NextResponse> {
+  // Use a loose type for the context to avoid the Next.js "invalid second argument" error
+  context: Record<string, any>
+) {
   try {
-    // 1) Destructure `id` from context.params
-    const { id } = context.params
+    // Destructure `id` from context.params
+    const { id } = context.params || {}
 
-    // 2) Check admin key
+    // 1) Check admin key
     const adminKey = request.headers.get('x-admin-key')
     if (!adminKey || adminKey !== process.env.ADMIN_KEY) {
       return NextResponse.json(
@@ -33,10 +34,10 @@ export async function DELETE(
       )
     }
 
-    // 3) Connect to MongoDB
+    // 2) Connect DB
     await connectDB()
 
-    // 4) Attempt to delete post by _id
+    // 3) Attempt to delete the post
     const deletedPost = await Post.findByIdAndDelete(id)
     if (!deletedPost) {
       return NextResponse.json({ error: 'Post not found' }, { status: 404 })
