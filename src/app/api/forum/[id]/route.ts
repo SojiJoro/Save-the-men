@@ -9,20 +9,22 @@ const postSchema = new mongoose.Schema({
   comments: [{ text: String, createdAt: Date }],
   createdAt: { type: Date, default: Date.now },
 })
-
-// Use existing model if it exists, otherwise create it
 const Post = mongoose.models.Post || mongoose.model('Post', postSchema)
 
 /**
  * DELETE /api/forum/[id]
- * Checks for an admin key in the 'x-admin-key' header, then deletes the post by _id
+ * - Checks x-admin-key in request headers vs process.env.ADMIN_KEY
+ * - Deletes post by _id
  */
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  context: { params: { id: string } }
+): Promise<NextResponse> {
   try {
-    // 1) Check the admin key
+    // 1) Destructure `id` from context.params
+    const { id } = context.params
+
+    // 2) Check admin key
     const adminKey = request.headers.get('x-admin-key')
     if (!adminKey || adminKey !== process.env.ADMIN_KEY) {
       return NextResponse.json(
@@ -31,17 +33,15 @@ export async function DELETE(
       )
     }
 
-    // 2) Connect to DB
+    // 3) Connect to MongoDB
     await connectDB()
 
-    // 3) Attempt to delete the post by _id
-    const { id } = params
+    // 4) Attempt to delete post by _id
     const deletedPost = await Post.findByIdAndDelete(id)
     if (!deletedPost) {
       return NextResponse.json({ error: 'Post not found' }, { status: 404 })
     }
 
-    // 4) Return success
     return NextResponse.json({ success: true, deletedPost })
   } catch (error) {
     console.error('DELETE /api/forum/[id] error:', error)
