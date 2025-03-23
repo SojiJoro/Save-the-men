@@ -37,16 +37,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         style={{ textDecoration: 'none', color: '#1da1f2' }}
       >
         Favoredsinner
-      </a>{' '}
-      on{' '}
-      <span style={{ display: 'inline-flex', alignItems: 'center' }}>
-        <img
-          src="/images/x-logo.svg"
-          alt="X Logo"
-          style={{ width: '16px', height: '16px', marginRight: '5px' }}
-        />
-        X
-      </span>
+      </a>
+      {' '}on X
     </p>
   </div>
 </footer>
