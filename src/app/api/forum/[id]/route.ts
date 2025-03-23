@@ -9,6 +9,7 @@ const postSchema = new mongoose.Schema({
   comments: [{ text: String, createdAt: Date }],
   createdAt: { type: Date, default: Date.now },
 })
+
 const Post = mongoose.models.Post || mongoose.model('Post', postSchema)
 
 /**
@@ -18,11 +19,11 @@ const Post = mongoose.models.Post || mongoose.model('Post', postSchema)
  */
 export async function DELETE(
   request: NextRequest,
-  // Use a loose type for the context to avoid the Next.js "invalid second argument" error
-  context: Record<string, any>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  context: any
 ) {
   try {
-    // Destructure `id` from context.params
+    // Safely extract the id from context.params
     const { id } = context.params || {}
 
     // 1) Check admin key
