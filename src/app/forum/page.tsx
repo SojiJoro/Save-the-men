@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 
 interface Post {
-  _id: string  // Mongoose typically uses _id instead of id
+  _id: string  // Mongoose typically uses _id
   title: string
   body: string
   comments: Comment[]
@@ -58,12 +58,11 @@ export default function AnonymousForum() {
     }
   }
 
-  // Add a comment (this example updates only in local state, 
-  // but you can also add a PATCH or POST request to your API 
+  // Add a comment (this example updates only in local state,
+  // but you can also add a PATCH or POST request to your API
   // for permanent comment storage.)
   function handleNewComment(postId: string) {
     if (!commentText.trim()) return
-    // Build new comment
     const newComment: Comment = {
       text: commentText,
       createdAt: new Date().toISOString(),
@@ -81,8 +80,30 @@ export default function AnonymousForum() {
       })
     )
     setCommentText('')
-    // For permanent comment storage, call your API 
-    // e.g. fetch(`/api/forum/${postId}/comments`, { ... })
+    // For permanent comment storage, you'd call an API route, e.g. PATCH /api/forum/:id
+  }
+
+  // DELETE a post (admin-only)
+  async function handleDelete(postId: string) {
+    try {
+      const res = await fetch(`/api/forum/${postId}`, {
+        method: 'DELETE',
+        headers: {
+          // This key must match process.env.ADMIN_KEY on the server
+          'x-admin-key': 'mySecretAdminKey12345'
+        }
+      })
+      if (!res.ok) {
+        if (res.status === 403) {
+          alert('Forbidden: Admin key invalid')
+        }
+        throw new Error('Failed to delete post')
+      }
+      // Re-fetch posts after deleting
+      await fetchPosts()
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -104,12 +125,12 @@ export default function AnonymousForum() {
 
       <div style={{ margin: '0 15px' }}>
         <p style={{ marginBottom: '5px', fontSize: '0.9rem' }}>
-          <strong>Disclaimer:</strong> This forum is for anonymous sharing of diaspora experiences. 
-          Posts are stored in a real database, so they will persist across refreshes and devices. 
+          <strong>Disclaimer:</strong> This forum is for anonymous sharing of diaspora experiences.
+          Posts are stored in a real database, so they will persist across refreshes and devices.
           We are not a crisis centre, law firm, or healthcare provider.
         </p>
         <p style={{ marginBottom: '15px', fontSize: '0.9rem' }}>
-          <strong>Confidentiality:</strong> We do not store personal info or IP addresses. 
+          <strong>Confidentiality:</strong> We do not store personal info or IP addresses.
           For urgent help, please contact local emergency services.
         </p>
       </div>
@@ -198,6 +219,7 @@ export default function AnonymousForum() {
                   commentText={commentText}
                   setCommentText={setCommentText}
                   handleNewComment={handleNewComment}
+                  handleDelete={handleDelete}  // pass the delete function
                 />
               ))}
             </tbody>
@@ -210,18 +232,20 @@ export default function AnonymousForum() {
 
 /** 
  * Renders each post as a row in the table, with a link-like title
- * that expands to show the body and comments.
+ * that expands to show the body and comments, plus a Delete button.
  */
 function ForumPostRow({
   post,
   commentText,
   setCommentText,
-  handleNewComment
+  handleNewComment,
+  handleDelete
 }: {
   post: Post
   commentText: string
   setCommentText: (val: string) => void
   handleNewComment: (postId: string) => void
+  handleDelete: (postId: string) => Promise<void>
 }) {
   const [expanded, setExpanded] = useState(false)
 
@@ -317,10 +341,27 @@ function ForumPostRow({
                     borderRadius: '3px',
                     cursor: 'pointer',
                     fontSize: '0.85rem',
-                    fontWeight: 'bold'
+                    fontWeight: 'bold',
+                    marginRight: '10px'
                   }}
                 >
                   Submit
+                </button>
+                {/* Delete (Admin) button */}
+                <button
+                  onClick={() => handleDelete(post._id)}
+                  style={{
+                    backgroundColor: 'red',
+                    color: '#fff',
+                    padding: '5px 10px',
+                    border: 'none',
+                    borderRadius: '3px',
+                    cursor: 'pointer',
+                    fontSize: '0.85rem',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  Delete (Admin)
                 </button>
               </div>
             </div>
