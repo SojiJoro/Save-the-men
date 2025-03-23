@@ -1,53 +1,77 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface Post {
-  id: number
+  _id: string  // Mongoose typically uses _id instead of id
   title: string
   body: string
   comments: Comment[]
-  createdAt: Date
+  createdAt: string
 }
 
 interface Comment {
-  id: number
+  _id?: string
   text: string
-  createdAt: Date
+  createdAt: string
 }
 
-export default function ForumNairalandStyle() {
+export default function AnonymousForum() {
   const [posts, setPosts] = useState<Post[]>([])
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const [commentText, setCommentText] = useState('')
 
-  // Create a new post
-  const handleNewPost = () => {
-    if (!title.trim() || !body.trim()) return
-    const newPost: Post = {
-      id: Date.now(),
-      title,
-      body,
-      comments: [],
-      createdAt: new Date(),
+  // Fetch posts from the API route on mount
+  useEffect(() => {
+    fetchPosts()
+  }, [])
+
+  // GET all posts
+  async function fetchPosts() {
+    try {
+      const res = await fetch('/api/forum')
+      if (!res.ok) throw new Error('Failed to fetch posts')
+      const data: Post[] = await res.json()
+      setPosts(data)
+    } catch (error) {
+      console.error(error)
     }
-    setPosts([newPost, ...posts])
-    setTitle('')
-    setBody('')
   }
 
-  // Add a comment
-  const handleNewComment = (postId: number) => {
-    if (!commentText.trim()) return
-    const newComment: Comment = {
-      id: Date.now(),
-      text: commentText,
-      createdAt: new Date(),
+  // POST a new post
+  async function handleNewPost() {
+    if (!title.trim() || !body.trim()) return
+    try {
+      const res = await fetch('/api/forum', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, body }),
+      })
+      if (!res.ok) throw new Error('Failed to create post')
+      // Refresh posts
+      await fetchPosts()
+      setTitle('')
+      setBody('')
+    } catch (error) {
+      console.error(error)
     }
+  }
+
+  // Add a comment (this example updates only in local state, 
+  // but you can also add a PATCH or POST request to your API 
+  // for permanent comment storage.)
+  function handleNewComment(postId: string) {
+    if (!commentText.trim()) return
+    // Build new comment
+    const newComment: Comment = {
+      text: commentText,
+      createdAt: new Date().toISOString(),
+    }
+    // Update local state
     setPosts(prevPosts =>
-      prevPosts.map(p => {
-        if (p.id === postId) {
+      prevPosts.map((p) => {
+        if (p._id === postId) {
           return {
             ...p,
             comments: [...p.comments, newComment],
@@ -57,6 +81,8 @@ export default function ForumNairalandStyle() {
       })
     )
     setCommentText('')
+    // For permanent comment storage, call your API 
+    // e.g. fetch(`/api/forum/${postId}/comments`, { ... })
   }
 
   return (
@@ -68,22 +94,23 @@ export default function ForumNairalandStyle() {
     }}>
       {/* HEADER-STYLE BANNER */}
       <div style={{
-        backgroundColor: '#006600',
+        backgroundColor: '#2c3e50',
         color: '#fff',
         padding: '10px 15px',
         marginBottom: '20px'
       }}>
-        <h1 style={{ margin: 0, fontSize: '1.5rem' }}>Anonymous Forum (Nairaland Style)</h1>
+        <h1 style={{ margin: 0, fontSize: '1.5rem' }}>Anonymous Forum</h1>
       </div>
 
       <div style={{ margin: '0 15px' }}>
         <p style={{ marginBottom: '5px', fontSize: '0.9rem' }}>
           <strong>Disclaimer:</strong> This forum is for anonymous sharing of diaspora experiences. 
-          We store data in-memory, so posts vanish on refresh. We are not a crisis centre, law firm, or healthcare provider.
+          Posts are stored in a real database, so they will persist across refreshes and devices. 
+          We are not a crisis centre, law firm, or healthcare provider.
         </p>
         <p style={{ marginBottom: '15px', fontSize: '0.9rem' }}>
-          <strong>Confidentiality:</strong> We do not store personal info or IP addresses. For urgent help,
-          please contact local emergency services.
+          <strong>Confidentiality:</strong> We do not store personal info or IP addresses. 
+          For urgent help, please contact local emergency services.
         </p>
       </div>
 
@@ -95,7 +122,7 @@ export default function ForumNairalandStyle() {
         margin: '0 15px 20px',
         borderRadius: '4px'
       }}>
-        <h2 style={{ fontSize: '1.1rem', marginBottom: '10px', color: '#006600' }}>
+        <h2 style={{ fontSize: '1.1rem', marginBottom: '10px', color: '#2c3e50' }}>
           Create a New Post (Anonymous)
         </h2>
         <div style={{ marginBottom: '10px' }}>
@@ -133,7 +160,7 @@ export default function ForumNairalandStyle() {
         <button
           onClick={handleNewPost}
           style={{
-            backgroundColor: '#006600',
+            backgroundColor: '#e58406',
             color: '#fff',
             padding: '6px 12px',
             border: 'none',
@@ -149,7 +176,7 @@ export default function ForumNairalandStyle() {
 
       {/* POST LIST TABLE */}
       <div style={{ margin: '0 15px' }}>
-        <h2 style={{ fontSize: '1.1rem', marginBottom: '10px', color: '#006600' }}>
+        <h2 style={{ fontSize: '1.1rem', marginBottom: '10px', color: '#2c3e50' }}>
           Recent Topics
         </h2>
         {posts.length === 0 ? (
@@ -166,7 +193,7 @@ export default function ForumNairalandStyle() {
             <tbody>
               {posts.map((post) => (
                 <ForumPostRow
-                  key={post.id}
+                  key={post._id}
                   post={post}
                   commentText={commentText}
                   setCommentText={setCommentText}
@@ -181,9 +208,9 @@ export default function ForumNairalandStyle() {
   )
 }
 
-/**
+/** 
  * Renders each post as a row in the table, with a link-like title
- * that expands to show the body and comments (like Nairaland style).
+ * that expands to show the body and comments.
  */
 function ForumPostRow({
   post,
@@ -194,7 +221,7 @@ function ForumPostRow({
   post: Post
   commentText: string
   setCommentText: (val: string) => void
-  handleNewComment: (postId: number) => void
+  handleNewComment: (postId: string) => void
 }) {
   const [expanded, setExpanded] = useState(false)
 
@@ -207,7 +234,7 @@ function ForumPostRow({
       <tr style={{ borderBottom: '1px solid #ddd' }}>
         <td style={{ padding: '8px', fontSize: '0.9rem' }}>
           <span
-            style={{ color: '#006600', cursor: 'pointer', textDecoration: 'underline' }}
+            style={{ color: '#2c3e50', cursor: 'pointer', textDecoration: 'underline' }}
             onClick={toggleExpand}
           >
             {post.title}
@@ -217,7 +244,7 @@ function ForumPostRow({
           {post.comments.length}
         </td>
         <td style={{ padding: '8px', fontSize: '0.8rem', color: '#666' }}>
-          {post.createdAt.toLocaleString()}
+          {new Date(post.createdAt).toLocaleString()}
         </td>
       </tr>
 
@@ -226,9 +253,11 @@ function ForumPostRow({
         <tr>
           <td colSpan={3} style={{ padding: '8px', backgroundColor: '#fafafa' }}>
             <div style={{ marginBottom: '10px' }}>
-              <p style={{ margin: 0, whiteSpace: 'pre-wrap', fontSize: '0.9rem' }}>{post.body}</p>
+              <p style={{ margin: 0, whiteSpace: 'pre-wrap', fontSize: '0.9rem' }}>
+                {post.body}
+              </p>
               <p style={{ fontSize: '0.8rem', color: '#999', marginTop: '5px' }}>
-                Posted anonymously on {post.createdAt.toLocaleString()}
+                Posted anonymously on {new Date(post.createdAt).toLocaleString()}
               </p>
             </div>
 
@@ -239,17 +268,17 @@ function ForumPostRow({
               padding: '10px',
               borderRadius: '4px'
             }}>
-              <h4 style={{ fontSize: '0.95rem', color: '#006600', marginBottom: '8px' }}>
+              <h4 style={{ fontSize: '0.95rem', color: '#2c3e50', marginBottom: '8px' }}>
                 Comments ({post.comments.length})
               </h4>
               {post.comments.length === 0 && (
                 <p style={{ fontSize: '0.85rem', color: '#666' }}>No comments yet.</p>
               )}
-              {post.comments.map((c) => (
-                <div key={c.id} style={{ marginBottom: '10px' }}>
+              {post.comments.map((c, index) => (
+                <div key={index} style={{ marginBottom: '10px' }}>
                   <p style={{ margin: 0, fontSize: '0.9rem' }}>{c.text}</p>
                   <p style={{ fontSize: '0.75rem', color: '#999' }}>
-                    Commented on {c.createdAt.toLocaleString()}
+                    Commented on {new Date(c.createdAt).toLocaleString()}
                   </p>
                   <hr style={{ border: 'none', borderTop: '1px solid #ccc', margin: '5px 0' }} />
                 </div>
@@ -257,7 +286,12 @@ function ForumPostRow({
 
               {/* New Comment */}
               <div style={{ marginTop: '10px' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', marginBottom: '5px', fontWeight: 'bold' }}>
+                <label style={{
+                  display: 'block', 
+                  fontSize: '0.85rem', 
+                  marginBottom: '5px', 
+                  fontWeight: 'bold'
+                }}>
                   Add Comment:
                 </label>
                 <textarea
@@ -274,9 +308,9 @@ function ForumPostRow({
                   }}
                 />
                 <button
-                  onClick={() => handleNewComment(post.id)}
+                  onClick={() => handleNewComment(post._id)}
                   style={{
-                    backgroundColor: '#006600',
+                    backgroundColor: '#e58406',
                     color: '#fff',
                     padding: '5px 10px',
                     border: 'none',
