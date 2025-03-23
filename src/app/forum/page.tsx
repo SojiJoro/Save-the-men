@@ -1,4 +1,3 @@
-// app/forum/page.tsx
 'use client'
 
 import { useState } from 'react'
@@ -17,7 +16,7 @@ interface Comment {
   createdAt: Date
 }
 
-export default function ForumPage() {
+export default function ForumNairalandStyle() {
   const [posts, setPosts] = useState<Post[]>([])
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
@@ -62,168 +61,238 @@ export default function ForumPage() {
 
   return (
     <div style={{
-      maxWidth: '900px',
-      margin: '40px auto',
-      padding: '0 20px',
-      fontFamily: 'Arial, sans-serif'
+      maxWidth: '1000px',
+      margin: '20px auto',
+      fontFamily: 'Verdana, sans-serif',
+      color: '#000'
     }}>
-      <h1 style={{ fontSize: '2rem', marginBottom: '10px' }}>Anonymous Forum</h1>
-      <p style={{ marginBottom: '5px', color: '#666' }}>
-        <strong>Disclaimer:</strong> This forum is for anonymous sharing of diaspora experiences. Posts and
-        comments are stored in-memory and will disappear on page refresh. We are not a crisis centre, law firm,
-        or healthcare provider.
-      </p>
-      <p style={{ marginBottom: '20px', color: '#666' }}>
-        <strong>Confidentiality:</strong> We do not store personal information or IP addresses here. For urgent help,
-        please contact local emergency services.
-      </p>
-
-      {/* New Post Form */}
+      {/* HEADER-STYLE BANNER */}
       <div style={{
-        background: '#fff',
-        padding: '20px',
-        borderRadius: '8px',
-        boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
-        marginBottom: '30px'
+        backgroundColor: '#006600',
+        color: '#fff',
+        padding: '10px 15px',
+        marginBottom: '20px'
       }}>
-        <h2 style={{ fontSize: '1.4rem', marginBottom: '15px' }}>Create a New Post (Anonymous)</h2>
+        <h1 style={{ margin: 0, fontSize: '1.5rem' }}>Anonymous Forum (Nairaland Style)</h1>
+      </div>
+
+      <div style={{ margin: '0 15px' }}>
+        <p style={{ marginBottom: '5px', fontSize: '0.9rem' }}>
+          <strong>Disclaimer:</strong> This forum is for anonymous sharing of diaspora experiences. 
+          We store data in-memory, so posts vanish on refresh. We are not a crisis centre, law firm, or healthcare provider.
+        </p>
+        <p style={{ marginBottom: '15px', fontSize: '0.9rem' }}>
+          <strong>Confidentiality:</strong> We do not store personal info or IP addresses. For urgent help,
+          please contact local emergency services.
+        </p>
+      </div>
+
+      {/* CREATE NEW POST */}
+      <div style={{
+        backgroundColor: '#f8f8f8',
+        border: '1px solid #ccc',
+        padding: '15px',
+        margin: '0 15px 20px',
+        borderRadius: '4px'
+      }}>
+        <h2 style={{ fontSize: '1.1rem', marginBottom: '10px', color: '#006600' }}>
+          Create a New Post (Anonymous)
+        </h2>
         <div style={{ marginBottom: '10px' }}>
-          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Title</label>
+          <label style={{ display: 'block', fontWeight: 'bold' }}>Title</label>
           <input
             type="text"
             value={title}
             onChange={e => setTitle(e.target.value)}
             style={{
               width: '100%',
-              padding: '10px',
-              borderRadius: '4px',
+              padding: '6px',
               border: '1px solid #ccc',
+              borderRadius: '3px',
+              marginTop: '5px'
             }}
             placeholder="Enter a brief title..."
           />
         </div>
         <div style={{ marginBottom: '10px' }}>
-          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Body</label>
+          <label style={{ display: 'block', fontWeight: 'bold' }}>Body</label>
           <textarea
             value={body}
             onChange={e => setBody(e.target.value)}
             rows={4}
             style={{
               width: '100%',
-              padding: '10px',
-              borderRadius: '4px',
+              padding: '6px',
               border: '1px solid #ccc',
-              resize: 'vertical',
+              borderRadius: '3px',
+              marginTop: '5px'
             }}
-            placeholder="Share your experience or question..."
+            placeholder="Share your experience..."
           />
         </div>
         <button
           onClick={handleNewPost}
           style={{
-            backgroundColor: '#e58406',
+            backgroundColor: '#006600',
             color: '#fff',
-            padding: '10px 20px',
+            padding: '6px 12px',
             border: 'none',
-            borderRadius: '4px',
+            borderRadius: '3px',
             cursor: 'pointer',
-            fontWeight: 'bold',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
-            transition: 'background-color 0.2s ease'
+            fontSize: '0.9rem',
+            fontWeight: 'bold'
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#cf7305')}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#e58406')}
         >
           Post
         </button>
       </div>
 
-      {/* Display Posts */}
-      <div>
-        <h2 style={{ fontSize: '1.4rem', marginBottom: '10px' }}>Recent Posts</h2>
-        {posts.length === 0 && (
-          <p style={{ color: '#666' }}>No posts yet. Be the first to share your story.</p>
+      {/* POST LIST TABLE */}
+      <div style={{ margin: '0 15px' }}>
+        <h2 style={{ fontSize: '1.1rem', marginBottom: '10px', color: '#006600' }}>
+          Recent Topics
+        </h2>
+        {posts.length === 0 ? (
+          <p style={{ fontSize: '0.9rem' }}>No posts yet. Be the first to share your story.</p>
+        ) : (
+          <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }}>
+            <thead>
+              <tr style={{ backgroundColor: '#f0f0f0', borderBottom: '2px solid #ccc' }}>
+                <th style={{ textAlign: 'left', padding: '8px' }}>Topic</th>
+                <th style={{ textAlign: 'left', padding: '8px', width: '120px' }}>Comments</th>
+                <th style={{ textAlign: 'left', padding: '8px', width: '200px' }}>Posted</th>
+              </tr>
+            </thead>
+            <tbody>
+              {posts.map((post) => (
+                <ForumPostRow
+                  key={post.id}
+                  post={post}
+                  commentText={commentText}
+                  setCommentText={setCommentText}
+                  handleNewComment={handleNewComment}
+                />
+              ))}
+            </tbody>
+          </table>
         )}
-        {posts.map(post => (
-          <div
-            key={post.id}
-            style={{
-              background: '#fff',
-              padding: '20px',
-              borderRadius: '8px',
-              boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
-              marginBottom: '20px'
-            }}
-          >
-            <h3 style={{ fontSize: '1.2rem', marginBottom: '5px' }}>{post.title}</h3>
-            <p style={{ marginBottom: '10px', whiteSpace: 'pre-wrap' }}>{post.body}</p>
-            <p style={{ fontSize: '0.85rem', color: '#999' }}>
-              Posted anonymously on {post.createdAt.toLocaleString()}
-            </p>
+      </div>
+    </div>
+  )
+}
 
-            {/* Comments Section */}
-            <div
-              style={{
-                marginTop: '15px',
-                background: '#fafafa',
-                padding: '15px',
-                borderRadius: '6px',
-                border: '1px solid #eee'
-              }}
-            >
-              <h4 style={{ fontSize: '1rem', marginBottom: '10px' }}>Comments (Anonymous)</h4>
-              {post.comments.map(comment => (
-                <div key={comment.id} style={{ marginBottom: '15px' }}>
-                  <p style={{ marginBottom: '5px' }}>{comment.text}</p>
-                  <p style={{ fontSize: '0.8rem', color: '#999' }}>
-                    Commented on {comment.createdAt.toLocaleString()}
+/**
+ * Renders each post as a row in the table, with a link-like title
+ * that expands to show the body and comments (like Nairaland style).
+ */
+function ForumPostRow({
+  post,
+  commentText,
+  setCommentText,
+  handleNewComment
+}: {
+  post: Post
+  commentText: string
+  setCommentText: (val: string) => void
+  handleNewComment: (postId: number) => void
+}) {
+  const [expanded, setExpanded] = useState(false)
+
+  const toggleExpand = () => {
+    setExpanded(!expanded)
+  }
+
+  return (
+    <>
+      <tr style={{ borderBottom: '1px solid #ddd' }}>
+        <td style={{ padding: '8px', fontSize: '0.9rem' }}>
+          <span
+            style={{ color: '#006600', cursor: 'pointer', textDecoration: 'underline' }}
+            onClick={toggleExpand}
+          >
+            {post.title}
+          </span>
+        </td>
+        <td style={{ padding: '8px', fontSize: '0.9rem' }}>
+          {post.comments.length}
+        </td>
+        <td style={{ padding: '8px', fontSize: '0.8rem', color: '#666' }}>
+          {post.createdAt.toLocaleString()}
+        </td>
+      </tr>
+
+      {/* If expanded, show post body + comment section below */}
+      {expanded && (
+        <tr>
+          <td colSpan={3} style={{ padding: '8px', backgroundColor: '#fafafa' }}>
+            <div style={{ marginBottom: '10px' }}>
+              <p style={{ margin: 0, whiteSpace: 'pre-wrap', fontSize: '0.9rem' }}>{post.body}</p>
+              <p style={{ fontSize: '0.8rem', color: '#999', marginTop: '5px' }}>
+                Posted anonymously on {post.createdAt.toLocaleString()}
+              </p>
+            </div>
+
+            {/* Comments */}
+            <div style={{
+              border: '1px solid #ddd',
+              backgroundColor: '#fff',
+              padding: '10px',
+              borderRadius: '4px'
+            }}>
+              <h4 style={{ fontSize: '0.95rem', color: '#006600', marginBottom: '8px' }}>
+                Comments ({post.comments.length})
+              </h4>
+              {post.comments.length === 0 && (
+                <p style={{ fontSize: '0.85rem', color: '#666' }}>No comments yet.</p>
+              )}
+              {post.comments.map((c) => (
+                <div key={c.id} style={{ marginBottom: '10px' }}>
+                  <p style={{ margin: 0, fontSize: '0.9rem' }}>{c.text}</p>
+                  <p style={{ fontSize: '0.75rem', color: '#999' }}>
+                    Commented on {c.createdAt.toLocaleString()}
                   </p>
-                  <hr style={{ border: 'none', borderTop: '1px solid #ccc', margin: '10px 0' }} />
+                  <hr style={{ border: 'none', borderTop: '1px solid #ccc', margin: '5px 0' }} />
                 </div>
               ))}
 
-              {/* New Comment Form */}
-              <div>
-                <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>
-                  New Comment:
+              {/* New Comment */}
+              <div style={{ marginTop: '10px' }}>
+                <label style={{ display: 'block', fontSize: '0.85rem', marginBottom: '5px', fontWeight: 'bold' }}>
+                  Add Comment:
                 </label>
                 <textarea
                   value={commentText}
-                  onChange={e => setCommentText(e.target.value)}
+                  onChange={(e) => setCommentText(e.target.value)}
                   rows={2}
                   style={{
                     width: '100%',
-                    padding: '8px',
-                    borderRadius: '4px',
+                    padding: '6px',
+                    borderRadius: '3px',
                     border: '1px solid #ccc',
-                    resize: 'vertical'
+                    resize: 'vertical',
+                    marginBottom: '5px'
                   }}
-                  placeholder="Write your comment..."
                 />
                 <button
                   onClick={() => handleNewComment(post.id)}
                   style={{
-                    marginTop: '10px',
-                    backgroundColor: '#2c3e50',
+                    backgroundColor: '#006600',
                     color: '#fff',
-                    padding: '8px 16px',
+                    padding: '5px 10px',
                     border: 'none',
-                    borderRadius: '4px',
+                    borderRadius: '3px',
                     cursor: 'pointer',
-                    fontWeight: 'bold',
-                    boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
-                    transition: 'background-color 0.2s ease'
+                    fontSize: '0.85rem',
+                    fontWeight: 'bold'
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#1f2d3b')}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#2c3e50')}
                 >
-                  Add Comment
+                  Submit
                 </button>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
+          </td>
+        </tr>
+      )}
+    </>
   )
 }
