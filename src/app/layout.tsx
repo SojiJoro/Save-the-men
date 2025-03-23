@@ -1,7 +1,7 @@
 // app/layout.tsx
 import './globals.css'
 import { ReactNode } from 'react'
-import Header from './header' // We'll create this next
+import Header from './Header' // Ensure the file is named "Header.tsx"
 
 export const metadata = {
   title: 'Save The Men',
