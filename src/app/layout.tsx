@@ -28,18 +28,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       taken by site users.
     </p>
 
-    {/* Add the "Created by" line here */}
     <p style={{ marginTop: '10px' }}>
-      Created by
-      {' '}
+      Created by{' '}
       <a
-        href="https://twitter.com/Favoredsinner"
+        href="https://x.com/Favoredsinner"
         target="_blank"
         rel="noopener noreferrer"
         style={{ textDecoration: 'none', color: '#1da1f2' }}
       >
         <span style={{ display: 'inline-flex', alignItems: 'center' }}>
-          {/* X logo icon */}
           <img
             src="/images/x-logo.svg"
             alt="X Logo"
