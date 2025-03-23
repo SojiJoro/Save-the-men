@@ -6,15 +6,22 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export default function Header() {
+  // Toggle state for mobile nav
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
     <header className="header-bar">
       <nav className="nav-container">
+        {/* Logo & Home Link */}
         <div className="logo">
           <Link
             href="/"
-            style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: '#fff' }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              textDecoration: 'none',
+              color: '#fff',
+            }}
           >
             <Image
               src="/logo.svg"
@@ -24,11 +31,13 @@ export default function Header() {
               priority
               style={{ marginRight: '8px' }}
             />
-            <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Save The Men</span>
+            <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+              Save The Men
+            </span>
           </Link>
         </div>
 
-        {/* Hamburger button */}
+        {/* Hamburger button (visible on mobile) */}
         <button
           className="hamburger-btn"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -43,7 +52,7 @@ export default function Header() {
           ☰
         </button>
 
-        {/* Nav links */}
+        {/* Navigation Links */}
         <ul
           className={`nav-links ${menuOpen ? 'show' : ''}`}
           style={{
@@ -57,6 +66,7 @@ export default function Header() {
           <li><Link href="/services">Services</Link></li>
           <li><Link href="/community">Community</Link></li>
           <li><Link href="/resources">Resources</Link></li>
+          <li><Link href="/forum">Forum</Link></li>
           <li><Link href="/contact">Contact</Link></li>
         </ul>
       </nav>
